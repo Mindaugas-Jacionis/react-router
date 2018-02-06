@@ -15,8 +15,13 @@ const initialState = {
  * this state is discouraged.
  */
 export function routerReducer(state = initialState, { type, payload } = {}) {
+  const currentPath = payload.pathname;
   if (type === LOCATION_CHANGE) {
-    return { ...state, location: payload };
+    return {
+      ...state,
+      pathStack: [...state.pathStack, currentPath],
+      location: payload
+    };
   }
 
   return state;
